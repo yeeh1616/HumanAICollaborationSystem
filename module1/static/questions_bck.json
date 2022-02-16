@@ -1,0 +1,49 @@
+[
+    {
+        "id": "q1",
+        "columnName": "description",
+        "question": "",
+        "answers": "",
+        "clarification": "********************",
+        "isPrimaryKey": "True",
+        "taskType": 0,
+        "foreignKeyType": 0,
+        "foreignKeyName": "Policy id",
+        "corpusPath": "./CornaNetPolicies/"
+    },
+    {
+        "id": "q2",
+        "columnName": "update_type",
+        "question": "If the entry type is an “Update”, then this variable records more information as to the magnitude of the update.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "********************",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "Change of Policy", "note": "A dimension other than the policy initiator, policy type, policy subtype, geographic target, demographic target has changed", "cosine_similarity": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "End of Policy", "note": "Either the policy has been cancelled/terminated or one of the following dimensions has changed: the policy initiator, policy type, policy subtype, geographic target, demographic target.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ]
+    },
+    {
+        "id": "q3",
+        "columnName": "country",
+        "question": "What is the country?",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the country in which a particular government policy is initiated. This variable always takes a value irrespective of what level of government the policy was made at (init country level).",
+        "isPrimaryKey": "False",
+        "taskType": 2
+    },
+    {
+        "id": "q4",
+        "columnName": "policy_id",
+        "question": "",
+        "answers": "",
+        "clarification": "",
+        "isPrimaryKey": "False",
+        "taskType": 4
+    }
+]

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+
+/* Style the table */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+/* Style table headers and table data */
+th, td {
+  text-align: center;
+  padding: 16px;
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+/* Zebra-striped table rows */
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
+.fa-check {
+  color: green;
+}
+
+.fa-remove {
+  color: red;
+}
+
+div.ex1 {
+    font-size: 18px;
+    background-color: white;
+    height: 800px;
+    width: 900px;
+    overflow-y: scroll;
+}
+
+div.ex2 {
+    font-size: 20px;
+    background-color: white;
+    height: 800px;
+    width: 900px;
+    overflow-y: scroll;
+}
+
+
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other on screens that are smaller than 600 px */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+
+<style>
+.label {
+  color: white;
+  padding: 2px;
+  font-family: Arial;
+}
+.high {background-color: #04AA6D;} /* Green */
+.info {background-color: #2196F3;} /* Blue */
+.middle {background-color: #ff9800;} /* Orange */
+.low {background-color: #f44336;} /* Red */
+.other {background-color: #e7e7e7; color: black;} /* Gray */
+</style>
+
+<script>
+    function highlighting(qid, pid) {
+        var options = document.getElementById(qid + "_answer");
+        var answer = [];
+
+        for(i = 0; i < options.length; i++) {
+            if(options[i].checked) {
+                answer.append(options[i].value);
+            }
+        }
+
+        var parmas = pid + '------' + answer;
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("summary").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("POST", "/policies/get_highlighting_text");
+        xhttp.send(parmas);
+    }
+
+    function highlighting2(qid,answerStr) {
+        let summary = document.getElementById("policyText").innerHTML;
+        let answers = [];
+        if(answerStr){
+            answers = answerStr.split('|');
+        } else {
+            document.getElementById("summary").innerHTML = summary;
+            return;
+        }
+
+        for(let answer of answers){
+            if(!(answer === "")){
+                let arr = answer.split(' ');
+                let re = '';
+                let res = '';
+
+                if(arr.length == 1){
+                    re = new RegExp(arr[0], 'g');
+                } else {
+                    let head = arr[0];
+                    let end = arr[arr.length-1];
+                    re = new RegExp(head + '[\\s\\S]*' + end, 'g');
+                }
+
+                res = summary.match(re);
+                document.getElementById("summary").innerHTML = summary.replace(res, "\"<span style=\"background-color: #FFFF00\">" + res + "</span>");
+            } else {
+                document.getElementById("summary").innerHTML = summary;
+            }
+        }
+    }
+
+    function save1(qid, pid, column) {
+        var answerName = qid + "_answer";
+        var options = document.getElementsByName(answerName);
+        var label = document.getElementById(qid + "_label");
+
+        for(i = 0; i < options.length; i++) {
+            if(options[i].checked) {
+                var parmas = '{"pid":"' + pid + '","qid":"' + qid + '","answer":"' + options[i].value + '","column":"' + column + '"}';
+
+                const xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        label.innerHTML = "Saved";
+                    }
+                };
+                xhttp.open("POST", "/policies/save");
+                xhttp.send(parmas);
+                break;
+            }
+        }
+    }
+
+    function save2(qid, pid, column) {
+        var answerId = qid + "_answer";
+        var label = document.getElementById(qid + "_label");
+        var answer = document.getElementById(answerId).innerHTML;
+        var parmas = '{"pid":"' + pid + '","qid":"' + qid + '","answer":"' + answer + '","column":"' + column + '"}';
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                label.innerHTML = "Saved";
+            }
+        };
+        xhttp.open("POST", "/policies/save");
+        xhttp.send(parmas);
+    }
+</script>
+
+</head>
+<body>
+
+<div class="row">
+  <div class="column">
+    <div class="column">
+        <h1>Annotation tasks</h1>
+        <div class="ex1">
+            {% for q in questions %}
+                {% if q['taskType'] == 1 %}
+                    <h2>{{ q['columnName'] }}</h2>
+                    <p>Question: {{ q['question'] }}</p>
+                    <p>Clarification: {{ q['clarification'] }}</p>
+                    <input type="hidden" id="{{ q['id'] }}_answer" value="{{ q['answers'] }}">
+
+                    {% for option in q["options"] %}
+                        {% if option['checked'] == "True" %}
+                            <input type="radio" name="{{ q['id'] }}_answer" value="{{ option['answer'] }}" checked>
+                        {% else %}
+                            <input type="radio" name="{{ q['id'] }}_answer" value="{{ option['answer'] }}">
+                        {% endif %}
+
+                        <label for="html">{{ option['text'] }}</label><br>
+
+                        {% if option['checked'] == "True" %}
+                            {% if option['cosine_similarity'] >= 0.8 %}
+                                <span class="label high">{{ option['cosine_similarity'] }} [AI Recommendation]</span><br><br>
+                            {% elif option['cosine_similarity'] < 0.8 and option['cosine_similarity'] >= 0.6 %}
+                                <span class="label middle">{{ option['cosine_similarity'] }} [AI Recommendation]</span><br><br>
+                            {% elif option['cosine_similarity'] < 0.6 %}
+                                <span class="label low">{{ option['cosine_similarity'] }} [AI Recommendation]</span><br><br>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <button onclick="save1('{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')">Save</button>
+                    <button onclick="highlighting('{{ q['id'] }}', '{{ policy.policy_id }}')">Highlighting</button>
+                    <br><p id="{{ q['id'] }}_label">Unsaved</p>
+                    <br><br><br>
+                {% elif q['taskType'] == 2 %}
+                    <h2>{{ q['columnName'] }}</h2>
+                    <p>Question: {{ q['question'] }}</p>
+                    <p>Clarification: {{ q['clarification'] }}</p>
+                    <textarea id="{{ q['id'] }}_answer" name="{{ q['id'] }}_answer">{{ q['answers'] }}</textarea>
+                    <br><br>
+                    <button onclick="save2('{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')">Save</button>
+                    <button id="{{ q['id'] }}" onclick="highlighting(this.id,this.value)" value='{{ q['answers'] }}'>Highlighting</button>
+                    <br><p id="{{ q['id'] }}_label">Unsaved</p>
+                    <br><br><br>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+  </div>
+  <div class="column">
+    <h1>Policy Id: {{ policy.policy_id }}</h1>
+    <div class="ex2">
+      {% for ele in summary_list %}{{ ele }}<br>{% endfor %}
+    </div>
+    <div id="policyText" style="display: none;">{{ policy.description }}</div>
+  </div>
+</div>
+    <button><a href="{{ url_for('policy.view', policy_id=policy.policy_id) }}">Save all</a></button>
+</body>
+</html>

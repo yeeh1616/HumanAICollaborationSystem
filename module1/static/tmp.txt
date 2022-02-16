@@ -1,0 +1,17 @@
+
+    {
+        "id": "",
+        "columnName": "",
+        "question": "",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ]
+    },
