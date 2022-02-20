@@ -28,10 +28,13 @@ def create_app():
     from .auth import bp_auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from .summary import bp_summary as policy_blueprint
-    app.register_blueprint(policy_blueprint)
+    from .summary import bp_summary as summary_blueprint
+    app.register_blueprint(summary_blueprint)
 
-    from .annotation import bp_annotation as policy_blueprint
-    app.register_blueprint(policy_blueprint)
+    from .annotation import bp_annotation as annotation_blueprint
+    app.register_blueprint(annotation_blueprint)
+
+    from .configuration import bp_configuration as configuration_blueprint
+    app.register_blueprint(configuration_blueprint)
 
     return app

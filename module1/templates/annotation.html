@@ -235,7 +235,7 @@ div.ex2 {
         <h1>Annotation tasks</h1>
         <div class="ex1">
             {% for q in questions %}
-                {% if q['taskType'] == 1 %}
+                {% if q['taskType'] == 1 and q["selected"] %}
                     <h2>{{ q['columnName'] }}</h2>
                     <p>Question: {{ q['question'] }}</p>
                     <p>Clarification: {{ q['clarification'] }}</p>
@@ -269,7 +269,7 @@ div.ex2 {
                     {% endif %}
                     <button onclick="highlighting('{{ q['id'] }}', '{{ q['AI_QA_result'] }}')">Highlighting</button>
                     <br><br><br>
-                {% elif q['taskType'] == 2 %}
+                {% elif q['taskType'] == 2 and q["selected"] %}
                     <h2>{{ q['columnName'] }}</h2>
                     <p>Question: {{ q['question'] }}</p>
                     <p>Clarification: {{ q['clarification'] }}</p>

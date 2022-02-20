@@ -1,0 +1,402 @@
+[
+    {
+        "id": "q1",
+        "columnName": "policy_id",
+        "question": "",
+        "answers": "",
+        "clarification": "",
+        "isPrimaryKey": "False",
+        "taskType": 4,
+        "selected": true
+    },
+    {
+        "id": "q2",
+        "columnName": "description",
+        "question": "",
+        "answers": "",
+        "clarification": "",
+        "isPrimaryKey": "True",
+        "taskType": 0,
+        "foreignKeyType": 0,
+        "foreignKeyName": "Policy id",
+        "corpusPath": "./CornaNetPolicies/",
+        "selected": true
+    },
+    {
+        "id": "q9",
+        "columnName": "country",
+        "question": "What is the country?",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the country in which a particular government policy is initiated. This variable always takes a value irrespective of what level of government the policy was made at (init country level).",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q3",
+        "columnName": "entry_type",
+        "question": "Is it updated one?",
+        "question2": "Where in the policy history of a given policy a record is situated?",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "New Entry", "note": " The record is the first instance of a policy being made on a given date for the following combination of dimensions: the policy initiator, policy type, policy sub type, geographic target, demographic target.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Update", "note": " The record is an update to a new entry insofar as some dimension of the record changes *other* than the following dimensions: the policy initiator, policy type, policy sub type, geographic target, demographic target.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q4",
+        "columnName": "correct_type",
+        "question": "Where in the policy history of a given policy a record is situated?",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "New Entry", "note": " The record is the first instance of a policy being made on a given date for the following combination of dimensions: the policy initiator, policy type, policy sub type, geographic target, demographic target.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Update", "note": " The record is an update to a new entry insofar as some dimension of the record changes *other* than the following dimensions: the policy initiator, policy type, policy sub type, geographic target, demographic target.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q5",
+        "columnName": "update_type",
+        "question": "If the entry type is an “Update”, then this variable records more information as to the magnitude of the update.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "********************",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "Change of Policy", "note": "A dimension other than the policy initiator, policy type, policy subtype, geographic target, demographic target has changed", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "End of Policy", "note": "Either the policy has been cancelled/terminated or one of the following dimensions has changed: the policy initiator, policy type, policy subtype, geographic target, demographic target.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q6",
+        "columnName": "update_level",
+        "question": "If the entry type is an “Update”, then this variable records more information as to the magnitude of the update.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "Strengthening", "note": "A policy strengthens in terms of its conditions, coverage, or compliance, or duration.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Relaxing", "note": " A policy relaxes in terms of its conditions, coverage, or compliance, or duration.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Strengthening and Relaxing", "note": "A policy strengthens in terms of its conditions, coverage, or compliance, or duration for some dimensions and relaxes on other dimensions.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q7",
+        "columnName": "date_start",
+        "question": "When does the policy take effect?",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the date that the government policy takes effect. If\nthere is no available information about this, then the date announced is used.",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q8",
+        "columnName": "date_announced",
+        "question": "When was this policy announced?",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the date that the government policy was announced.",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q10",
+        "columnName": "init_country_level",
+        "question": "Was the policy made from a level of government other than the national level?",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "National Level", "note": "No, it is at the national level", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Province/State Level", "note": "Yes it is at the province/state level", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "City/Municipal Level", "note": "Yes, it is a the city/municipal level", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Other government level", "note": "Yes, it is at another governmental level ", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q11",
+        "columnName": "province",
+        "question": "Please select the appropriate province/state [(country)].",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the province from which a policy is initiated, if applicable. This variable only takes a value if the response to init country level is ’Provincial’.",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q12",
+        "columnName": "city",
+        "question": "If this policy was announced by a particular city, please specify the city here.",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the city from which a policy is initiated, if applicable. This variable only takes a value if the response to init country level is ’City’.",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q13",
+        "columnName": "type",
+        "question": "Please select the appropriate policy category.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable captures the type of government policy. Note that in the survey, it is possible to access the definitions and examples for each policy type via pop-up buttons in the survey.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "Declaration of Emergency", "note": "The head of government declares a state of national emergency.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Lockdown", "note": "Targets of the policy are obliged shelter in place irrespective of potential likelihood of COVID-19 transmission and are only allowed to leave their shelter for specific reasons.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Curfew", "note": "Government policies that limit domestic freedom of movement to certain times of the day.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Quarantine", "note": "Targets of the policy are obliged to isolate themselves for at least 14 days because there is reason to suspect a person is infected with COVID-19.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "External Border Restrictions", "note": "Government policies which reduce the ability to access ports of entry or exit to or from different governmental jurisdictions.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Internal Border Restrictions", "note": "Government policies which reduce the ability to move freely within the borders of the initiating government.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Restrictions of Mass Gatherings", "note": "Government policies that limit the number of people allowed to congregate in a place. Please enter the number in the text entry.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Closure and Regulations of Schools", "note": "Government policy which regulates educational establishments in a country. This may include: closing an educational institution completely, allowing an educational institution to open with certain conditions; allowing an educational institution to stay open without conditions.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Restriction and Regulations of Businesses", "note": "Government policy regulates private, commercial activity. This can include closing down commercial establishments completely; allowing commercial establishments to open with conditions; or allowing commercial establishments to open without conditions.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Restriction and Regulation of Government Services", "note": "Government policy which restricts and regulates government services, both essential and essential. This can include ceasing government services completely; allowing government services to operate with conditions; or allowing government services to operate without conditions.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Social Distancing", "note": "Government policies that limit physical contact between individuals in public spaces.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Health Monitoring", "note": "Government policies that seek to monitor the health of individuals who are afflicted with or who are likely to be afflicted with COVID-19.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Health Testing", "note": "Government policies which seeks to sample large populations for coronavirus regardless of suspected likelihood of affliction with COVID-19.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Health Resources", "note": "Government policies which affect the material (e.g. medical equipment, number of hospitals for public health) or human (e.g. doctors, nurses) health resources of a country.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Hygiene", "note": "Government efforts to promote hygiene in public spaces (e.g. disinfection of subways, burials).", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Public Awareness Measures", "note": "Efforts to disseminate or gather reliable information about COVID-19, including ways to prevent or mitigate the health effects of COVID-19.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Anti-Disinformation Measures", "note": "Efforts by the government to limit the spread of false, inaccurate or harmful information with regards to COVID-19.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "New Task Force, Bureau or Administrative Configuration", "note": "Government policy that changes the administrative capacity of a part of government to respond to the crisis.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q14",
+        "columnName": "target_country",
+        "question": "Please select as many countries that are targets of this policy as applicable.",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the country or countries that is/are the target of a particular government policy. This variable always takes a value irrespective of what geographic level the policy is targeting.",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q15",
+        "columnName": "target_geog_level",
+        "question": "Please specify which geographical or administrative entity is the target of the policy.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable documents the geographic or administrative entity that the policy targets.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "All countries", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "One or more regional groupings", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "One or more countries and one or more regional groupings", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "One or more countries, but not all countries", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "One or more provinces within one or more countries", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "One or more cities within one or more countries", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "One or more geographical or administrative units (other than provincial or city level units) within one or more countries", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "An international organization (e.g. World Health Organization)", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q16",
+        "columnName": "target_region",
+        "question": "Please choose as many applicable regions as possible.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable documents the region or regions that is/are the targets of a particular government policy.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "Africa", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "ASEAN Countries", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Asia", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Central America", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Europe", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "European Union (with the UK)", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "European Union (without the UK)", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Latin America", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Middle East", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "North America", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Oceania", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Schengen Area (with the UK)", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Schengen Area (without the UK)", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Other Regions [Text entry]", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q17",
+        "columnName": "target_city",
+        "question": "Please write in what cities/municipalities this policy is targeted towards.",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the city that is/are the target of a particular government policy, if applicable. Note, it only takes on a value if [target geog level] == \"One or more cities within one or more countries\".",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q18",
+        "columnName": "target_other",
+        "question": "Please write in what other geographic or administrative unit this policy is targeted towards.",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the subnational region or regions that is/are the target of a particular government policy which are not provinces or cities. Note, it only takes on a value if [target geog level] == ‘One or more geographical or administrative units (other than provincial or city level units) within one or more countries”",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q19",
+        "columnName": "target_who_what",
+        "question": "Please select from the list below what or whom the policy is targeted at.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable codes the people or materials who are the target of a particular policy.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "All (Travelers + Residents)", "note": "Government policy that applies to all humans regardless of residency or travel status.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "All Travelers (Citizen Travelers + Foreign Travelers)", "note": "Government policy targeted toward all travelers, both foreign and domestic.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Citizen Travelers", "note": "A government policy that applies only to domestic nationals travelling outside the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Foreign Travelers", "note": "A government policy that applies to only to foreign nationals travelling outside the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "All Residents (Citizen Residents + Foreign Residents)", "note": "Government policy targeted toward residents, both foreign nationals and domestic nationals, in the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Citizen Residents", "note": "Government policies that apply only to citizens who are residing in the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Foreign Residents", "note": "Government policies that that apply only to foreign nationals who are residing in the country in initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "All Foreign Nationals", "note": "Government policies that that apply only to foreign nationals who are residing in the country in initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "All Citizens", "note": "Individuals with citizenship or permanent residency in the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Health Staff", "note": "Government policy targeted toward human health staff.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Health related supplies", "note": "Government policy targeted toward health related supplies.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q20",
+        "columnName": "target_direction",
+        "question": "Please select whether this policy is inbound, outbound or both inbound/outbound.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable documents the “directionality” of a government policy if the geographic target of a policy is not the same as the policy initiator.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "Inbound", "note": "Government policy that seeks to control movement of people entering the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Outbound", "note": "Government policy that seeks to control movement of people exiting the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Inbound/Outbound", "note": "Government policy that seeks to control the movement of people entering or exiting the country", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Not applicable", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q21",
+        "columnName": "travel_mechanism",
+        "question": "If applicable, please select what mode of transportation this policy is applied to.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable codes the mechanisms of travel that a policy is targeted toward.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "All mechanisms", "note": "Government policy that applies toward all mechanisms of travel. See other categories for more detail on possible mechanisms of travel.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Flights", "note": "Government policy that applies to air travel.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Land Border", "note": "Government policy that applies to non-air travel across land borders.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Trains", "note": "Government policy that applies towards train travel.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Buses", "note": "Government policy that applies towards bus travel.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Seaports", "note": "Government policy that applies towards water travel.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Cruises", "note": "Government policy that applies towards cruise travel.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Ferries", "note": "Government policy that applies towards ferry travel.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Not applicable", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q22",
+        "columnName": "compliance",
+        "question": "What kind of enforcement does this policy have (if any)?",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable captures information about the de jure compliance of a policy.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "Mandatory With Legal Penalties", "note": "The prescribed government policy is mandatory/ must be followed. If the policy is not followed, people may face legal penalties like jail time.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Mandatory with Fines", "note": "The prescribed government policy is mandatory/ must be followed but some exceptions are allowed. If the policy is not followed, people must pay a fine.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Mandatory (Unspecified/Implied)", "note": "The prescribed government policy is mandatory/must be followed but the penalty for failing to comply is not made explicit or is implied. For instance, in the example given below, the implication of the policy (even though it is not explicitly stated) is that travelers without a health certificate will not be allowed to enter the country. E.g. In the Dominican Republic, as of March 19, \"all travelers arriving in the country must complete a travel history form\"", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Mandatory with Exceptions", "note": "There are some exceptions to the policy but it is mandatory for those for whom it applies. E.g. “As of March 13, the Indian government suspended most travel and tourism visas, with the exception of ‘diplomatic, official, U.N. or International Organizations, employment and project visas’ until April 15.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Recommended/Voluntary but no penalties", "note": "The prescribed policy is recommended by the initiating body but compliance is voluntary.", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    },
+    {
+        "id": "q23",
+        "columnName": "enforcer",
+        "question": "Please select as many organizations that apply in terms of enforcing compliance or issuing recommendations for the policy you are documenting.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "The organizational body in charge of enforcing compliance with a particular policy or issuing recommendations for a particular policy. This variable can take on one or more of the following values:",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"option": "National government", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Ministry/Department of Health", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Ministry/Department of Justice", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Ministry/Department of Foreign Affairs", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Ministry/Department of Education", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Military", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Provincial/state government", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Municipal government", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Police", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "New (COVID-19 specific) Task Force", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"option": "Other (Please specify in the text box) [Text Entry]", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0}
+            ],
+        "selected": true
+    }
+]

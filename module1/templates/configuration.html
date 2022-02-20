@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+    function check(obj) {
+        var parmas = '';
+        if($(obj).is(":checked")){
+            parmas = $(obj).attr('name') + '|True';
+        }else{
+            parmas = $(obj).attr('name') + '|False';
+        }
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+
+        };
+        xhttp.open("POST", "/configuration/save");
+        xhttp.send(parmas);
+    }
+    </script>
+</head>
+<body>
+
+<form>
+  <legend>Choose properties</legend>
+    {% for q in questions %}
+        {% if q['taskType'] == 1 or q['taskType'] == 2 %}
+            <div>
+                {% if q["selected"] %}
+                    <input type="checkbox" id="{{ q["columnName"] }}" name="{{ q["columnName"] }}" value="{{ q["columnName"] }}" onchange="check(this)" checked>
+                {% else %}
+                    <input type="checkbox" id="{{ q["columnName"] }}" name="{{ q["columnName"] }}" value="{{ q["columnName"] }}" onchange="check(this)">
+                {% endif %}
+              <label for="{{ q["columnName"] }}">{{ q["columnName"] }}</label>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <div>
+        <button id="next">
+        <a href="{{ url_for('configuration.done') }}"
+            class="btn btn-outline-primary"
+            role="button">Save</a>
+        </button>
+    </div>
+</form>
+
+</body>
+</html>
