@@ -195,12 +195,12 @@ div.ex2 {
                         <label>------(Note:{{ option['note'] }})</label><br>
 
                         {% if option['type'] == 2 %}
-                            {% if option['cosine_similarity'] >= 0.8 %}
-                                <span class="label high">{{ option['cosine_similarity'] }} [AI Recommendation]</span><br><br>
-                            {% elif option['cosine_similarity'] < 0.8 and option['cosine_similarity'] >= 0.6 %}
-                                <span class="label middle">{{ option['cosine_similarity'] }} [AI Recommendation]</span><br><br>
-                            {% elif option['cosine_similarity'] < 0.6 %}
-                                <span class="label low">{{ option['cosine_similarity'] }} [AI Recommendation]</span><br><br>
+                            {% if option['cos'] >= 0.8 %}
+                                <span class="label high">{{ option['cos'] }} [AI Recommendation]</span><br><br>
+                            {% elif option['cos'] < 0.8 and option['cos'] >= 0.6 %}
+                                <span class="label middle">{{ option['cos'] }} [AI Recommendation]</span><br><br>
+                            {% elif option['cos'] < 0.6 %}
+                                <span class="label low">{{ option['cos'] }} [AI Recommendation]</span><br><br>
                             {% endif %}
                         {% endif %}
                     {% endfor %}

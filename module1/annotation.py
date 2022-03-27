@@ -95,6 +95,23 @@ def multi_QA(question, contexts, model_name):
     return answers
 
 
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+model2 = SentenceTransformer('bert-base-nli-mean-tokens')
+
+def multi_choice_QA(policy, options_list):
+    options_list.insert(0, policy)
+    # Encoding:
+    sentence_embeddings = model2.encode(options_list)
+    sentence_embeddings.shape
+
+    # let's calculate cosine similarity for sentence 0:
+    return cosine_similarity(
+        [sentence_embeddings[0]],
+        sentence_embeddings[1:]
+    )
+
+
 @bp_annotation.route("/policies/<int:policy_id>/annotation", methods=['GET', 'POST'])
 @login_required
 def get_annotation(policy_id):
@@ -108,31 +125,41 @@ def get_annotation(policy_id):
 
         for q in q_objs:
             db_column_name = q["columnName"]
-
             obj_property = getattr(policy, db_column_name)
 
             # test
             # if answer == '':
             #     answer = 'A dimension other than the policy initiator'
 
+            print(q["id"])
             if q["taskType"] == 1:
-                q["AI_QA_result"] = multi_QA(q["question"], context, model_name)
-                m_cos = 0
-
+                options_list = []
                 for option in q["options"]:
-                    option_text = option["option"]
-                    cosine_similarity = max_cos(option_text, q["AI_QA_result"])
+                    options_list.append(option["option"] if option["note"]=="" else option["note"])
+                q["AI_QA_result"] = multi_choice_QA(policy, options_list)[0]
+                m_cos = 0
+                arr = q["AI_QA_result"].tolist()
+                max_cos = max(arr)
 
-                    # cosine_similarity = 0.8
+                for i in range(0, len(q["AI_QA_result"])):
+                    q["options"][i]["cos"] = q["AI_QA_result"][i]
+                    if q["AI_QA_result"][i] == max_cos:
+                        q["options"][i]["checked"] = "True"
 
-                    option["cosine_similarity"] = cosine_similarity
-
-                    if m_cos < cosine_similarity:
-                        m_cos = cosine_similarity
+                # for option in q["options"]:
+                #     option_text = option["option"]
+                #     cosine_similarity = max_cos(option_text, q["AI_QA_result"])
+                #
+                #     # cosine_similarity = 0.8
+                #
+                #     option["cos"] = cosine_similarity
+                #
+                #     if m_cos < cosine_similarity:
+                #         m_cos = cosine_similarity
 
                 if obj_property is None and obj_property == "":
                     for option in q["options"]:
-                        if m_cos == option["cosine_similarity"]:
+                        if m_cos == option["cos"]:
                             q["answers"] = option["option"]
                 else:
                     q["answers"] = obj_property
@@ -149,12 +176,12 @@ def get_annotation(policy_id):
                             option["type"] = 1
                             break
                     for option in q["options"]:
-                        if option["cosine_similarity"] == max_cos:
+                        if option["cos"] == max_cos:
                             option["type"] = 2
                             break
                 else:
                     for option in q["options"]:
-                        if option["cosine_similarity"] == max_cos:
+                        if option["cos"] == max_cos:
                             option["checked"] = "True"
                             option["type"] = 2
                             break
