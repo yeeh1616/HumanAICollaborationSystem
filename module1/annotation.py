@@ -52,7 +52,7 @@ def get_highlighting_text():
 
     return summary
 
-def signle_QA(question, context):
+def signle_QA2(question, context):
     inputs = tokenizer.encode_plus(question, context, return_tensors="pt")
     answer_start_scores, answer_end_scores = model(**inputs)
     answer_start = torch.argmax(answer_start_scores)
@@ -67,10 +67,26 @@ def signle_QA(question, context):
     return answer
 
 
-def multi_QA(question, contexts):
+def signle_QA(question, context, model_name):
+    from transformers import pipeline
+
+    nlp = pipeline('question-answering', model=model_name, tokenizer=model_name)
+    QA_input = {
+        'question': question,
+        'context': context
+    }
+    res = nlp(QA_input)
+
+    return res['answer']
+
+
+def multi_QA(question, contexts, model_name):
     answers = ''
     for context in contexts:
-        answer = signle_QA(question, context)
+        if context == '':
+            continue
+
+        answer = signle_QA(question, context, model_name)
         if answer != None and answer != "":
             if answers == '':
                 answers = answer
@@ -82,6 +98,7 @@ def multi_QA(question, contexts):
 @bp_annotation.route("/policies/<int:policy_id>/annotation", methods=['GET', 'POST'])
 @login_required
 def get_annotation(policy_id):
+    model_name = 'deepset/bert-base-cased-squad2'
     with open('./module1/static/questions.json', encoding="utf8") as f:
         q_objs = json.load(f)
 
@@ -99,7 +116,7 @@ def get_annotation(policy_id):
             #     answer = 'A dimension other than the policy initiator'
 
             if q["taskType"] == 1:
-                q["AI_QA_result"] = multi_QA(q["question"], context)
+                q["AI_QA_result"] = multi_QA(q["question"], context, model_name)
                 m_cos = 0
 
                 for option in q["options"]:
@@ -144,14 +161,15 @@ def get_annotation(policy_id):
                 q["has_answer"] = has_answer
             elif q["taskType"] == 2:
                 if obj_property is None or obj_property == "":
-                    q["answers"] = multi_QA(q["question"], context)
+                    q["answers"] = multi_QA(q["question"], context, model_name)
                 else:
                     q["answers"] = obj_property
                     has_answer = True
                 q["has_answer"] = has_answer
 
     summary_list = policy.description.split('\n')
-    return render_template('annotation.html', policy=policy, questions=q_objs, summary_list=summary_list)
+    original_list = policy.original_text.split('\n')
+    return render_template('annotation.html', policy=policy, questions=q_objs, summary_list=summary_list, original_list=original_list)
 
 
 def max_cos(option, answers):
