@@ -192,7 +192,9 @@ div.ex2 {
                         {% endif %}
 
                         <label>{{ option['option'] }}</label><br>
-                        <label>------(Note:{{ option['note'] }})</label><br>
+                        {% if option['note'] != "" %}
+                            <label>------(Note:{{ option['note'] }})</label><br>
+                        {% endif %}
 
                         {% if option['type'] == 2 %}
                             {% if option['cos'] >= 0.8 %}

@@ -139,9 +139,11 @@ def get_annotation(policy_id):
                 q["AI_QA_result"] = multi_choice_QA(policy, options_list)[0]
                 m_cos = 0
                 arr = q["AI_QA_result"].tolist()
+                # max_cos = round(max(arr), 2)
                 max_cos = max(arr)
 
                 for i in range(0, len(q["AI_QA_result"])):
+                    # q["options"][i]["cos"] = round(q["AI_QA_result"][i])
                     q["options"][i]["cos"] = q["AI_QA_result"][i]
                     if q["AI_QA_result"][i] == max_cos:
                         q["options"][i]["checked"] = "True"
