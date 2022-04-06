@@ -130,9 +130,54 @@ div.ex2 {
         }
     }
 
+    function highlighting_multichoice(policyId, questionId) {
+        // 1. 找到policy文本的div对象
+        var policyNode = document.getElementById("summary")
+        policyNode.innerHTML = "";
+
+        var ele = document.getElementsByName(questionId+'_answer');
+        var optionId = "";
+
+        for(i=0; i<ele.length; i++){
+            if(ele[i].checked){
+                optionId = ele[i].id;
+            }
+        }
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                // clean policy div
+                // read the returned policy turn it from json into object
+                //
+                const json = xhttp.responseText;
+                const graphs = JSON.parse(json);
+
+                for(var i = 0; i < graphs.length-1; i++){
+                    // 2. 生成一个div对象
+                    var div = document.createElement("div");
+                    for(const [sid, sentence] of graphs[i]){
+                        // 3. 生成一个span对象，加在div对象
+                        var span = document.createElement("span");
+                        span.innerHTML = sentence["sentence"];
+                        div.appendChild(span);
+
+
+                        // 4. 如果score >= 0.8
+                        // 5. 如果socre >= 0.7
+                        // 6. 如果socre >= 0.5
+                        // 7. 如果socre < 0.5
+                    }
+                }
+            }
+        };
+        xhttp.open("POST", "/policies/highlighting");
+        xhttp.send(policyId + "------" + questionId + "------" + optionId);
+    }
+
     function save1(btn, qid, pid, column) {
         var answerName = qid + "_answer";
-        var options = document.getElementsByName(answerName);
+        var options = document.getElementById(answerName);
         var label = document.getElementById(qid + "_label");
 
         for(i = 0; i < options.length; i++) {
@@ -178,56 +223,58 @@ div.ex2 {
         <h1>Annotation tasks</h1>
         <div class="ex1">
             {% for q in questions %}
-                {% if q['taskType'] == 1 and q["selected"] %}
-                    <h2>{{ q['columnName'] }}</h2>
-                    <p>Question: {{ q['question'] }}</p>
-                    <p>Clarification: {{ q['clarification'] }}</p>
-                    <input type="hidden" id="{{ q['id'] }}_answer" value="{{ q['answers'] }}">
+                <div id="{{ q['id'] }}">
+                    {% if q['taskType'] == 1 and q["selected"] %}
+                        <h2>{{ q['columnName'] }}</h2>
+                        <p>Question: {{ q['question'] }}</p>
+                        <p>Clarification: {{ q['clarification'] }}</p>
+                        <input type="hidden" id="{{ q['id'] }}_answer" value="{{ q['answers'] }}">
 
-                    {% for option in q["options"] %}
-                        {% if option['checked'] == "True" %}
-                            <input type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('btn_save_{{ q['id'] }}')" checked >
-                        {% else %}
-                            <input type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('btn_save_{{ q['id'] }}')" >
-                        {% endif %}
-
-                        <label>{{ option['option'] }}</label><br>
-                        {% if option['note'] != "" %}
-                            <label>------(Note:{{ option['note'] }})</label><br>
-                        {% endif %}
-
-                        {% if option['type'] == 2 %}
-                            {% if option['cos'] >= 0.8 %}
-                                <span class="label high">{{ option['cos'] }} [AI Recommendation]</span><br><br>
-                            {% elif option['cos'] < 0.8 and option['cos'] >= 0.6 %}
-                                <span class="label middle">{{ option['cos'] }} [AI Recommendation]</span><br><br>
-                            {% elif option['cos'] < 0.6 %}
-                                <span class="label low">{{ option['cos'] }} [AI Recommendation]</span><br><br>
+                        {% for option in q["options"] %}
+                            {% if option['checked'] == "True" %}
+                                <input id="{{ option["id"] }}" type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('btn_save_{{ q['id'] }}')" checked >
+                            {% else %}
+                                <input id="{{ option["id"] }}" type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('btn_save_{{ q['id'] }}')" >
                             {% endif %}
-                        {% endif %}
-                    {% endfor %}
 
-                    {% if q['has_answer'] %}
-                        <button id="btn_save_{{ q['id'] }}" onclick="save1(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')" disabled>Save</button>
-                    {% else %}
-                        <button id="btn_save_{{ q['id'] }}" onclick="save1(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')">Save</button>
+                            <label>{{ option['option'] }}</label><br>
+                            {% if option['note'] != "" %}
+                                <label>({{ option['note'] }})</label><br>
+                            {% endif %}
+
+                            {% if option['type'] == 2 %}
+                                {% if option['cos'] >= 0.8 %}
+                                    <span class="label high">{{ option['cos'] }} [AI Recommendation]</span><br><br>
+                                {% elif option['cos'] < 0.8 and option['cos'] >= 0.6 %}
+                                    <span class="label middle">{{ option['cos'] }} [AI Recommendation]</span><br><br>
+                                {% elif option['cos'] < 0.6 %}
+                                    <span class="label low">{{ option['cos'] }} [AI Recommendation]</span><br><br>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if q['has_answer'] %}
+                            <button id="btn_save_{{ q['id'] }}" onclick="save1(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')" disabled>Save</button>
+                        {% else %}
+                            <button id="btn_save_{{ q['id'] }}" onclick="save1(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')">Save</button>
+                        {% endif %}
+                        <button onclick="highlighting_multichoice('{{ policy.policy_id }}', '{{ q['id'] }}')">Highlighting</button>
+                        <br><br><br>
+                    {% elif q['taskType'] == 2 and q["selected"] %}
+                        <h2>{{ q['columnName'] }}</h2>
+                        <p>Question: {{ q['question'] }}</p>
+                        <p>Clarification: {{ q['clarification'] }}</p>
+                        <textarea id="{{ q['id'] }}_answer" name="{{ q['id'] }}_answer" onkeyup ="text_change('btn_save_{{ q['id'] }}')">{{ q["answers"] }}</textarea>
+                        <br><br>
+                        {% if q['has_answer'] %}
+                            <button id="btn_save_{{ q['id'] }}" onclick="save2(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')" disabled>Save</button>
+                        {% else %}
+                            <button id="btn_save_{{ q['id'] }}" onclick="save2(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')">Save</button>
+                        {% endif %}
+                        <button onclick="highlighting('{{ q['id'] }}', '{{ q['answers'] }}')">Highlighting</button>
+                        <br><br><br>
                     {% endif %}
-                    <button onclick="highlighting('{{ q['id'] }}', '{{ q['AI_QA_result'] }}')">Highlighting</button>
-                    <br><br><br>
-                {% elif q['taskType'] == 2 and q["selected"] %}
-                    <h2>{{ q['columnName'] }}</h2>
-                    <p>Question: {{ q['question'] }}</p>
-                    <p>Clarification: {{ q['clarification'] }}</p>
-                    <textarea id="{{ q['id'] }}_answer" name="{{ q['id'] }}_answer" onkeyup ="text_change('btn_save_{{ q['id'] }}')">{{ q["answers"] }}</textarea>
-                    <br><br>
-                    {% if q['has_answer'] %}
-                        <button id="btn_save_{{ q['id'] }}" onclick="save2(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')" disabled>Save</button>
-                    {% else %}
-                        <button id="btn_save_{{ q['id'] }}" onclick="save2(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')">Save</button>
-                    {% endif %}
-                    <button onclick="highlighting('{{ q['id'] }}', '{{ q['answers'] }}')">Highlighting</button>
-                    <br><br><br>
-                {% endif %}
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -235,8 +282,15 @@ div.ex2 {
   <div class="column">
     <h1>Policy Id: {{ policy.policy_id }}</h1>
     <div class="ex2" id="summary">
-      {% for ot in original_list %}
-            <div>{{ ot }}</div>
+      {% for g in graph_list %}
+            <div>
+                {% for key in g %}
+                    <span id='{{ key }}'>
+                        {{ g[key] }}
+                    </span>
+                {% endfor %}
+            </div>
+          <br>
       {% endfor %}
     </div>
   </div>
