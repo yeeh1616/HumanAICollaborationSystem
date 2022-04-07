@@ -150,24 +150,35 @@ div.ex2 {
                 // clean policy div
                 // read the returned policy turn it from json into object
                 //
-                const json = xhttp.responseText;
-                const graphs = JSON.parse(json);
+                var json = xhttp.responseText;
+                var obj = JSON.parse(json);
 
-                for(var i = 0; i < graphs.length-1; i++){
-                    // 2. 生成一个div对象
+                for (const [key, graphs] of Object.entries(obj)) {
                     var div = document.createElement("div");
-                    for(const [sid, sentence] of graphs[i]){
+                    for (const g of Object.entries(graphs)) {
+                        var sen = g[1];
+                        var sentence = sen["sentence"];
+                        var score = parseFloat(sen["score"].substring(0,3));
+
                         // 3. 生成一个span对象，加在div对象
                         var span = document.createElement("span");
-                        span.innerHTML = sentence["sentence"];
-                        div.appendChild(span);
-
-
+                        span.innerHTML = sentence;
                         // 4. 如果score >= 0.8
                         // 5. 如果socre >= 0.7
                         // 6. 如果socre >= 0.5
                         // 7. 如果socre < 0.5
+                        if(score>=0.8){
+                            span.style.backgroundColor = '#c37400';
+                        }else if(score>=0.7 && score <0.8){
+                            span.style.backgroundColor = '#fff300';
+                        }else if(score>=0.5 && score <0.7){
+                            span.style.backgroundColor = '#fffba1';
+                        }else {
+
+                        }
+                        div.appendChild(span);
                     }
+                    policyNode.append(div);
                 }
             }
         };
