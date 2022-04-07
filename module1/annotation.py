@@ -83,16 +83,20 @@ def get_highlight_sentences(policy_id, option_text):
     policy_original_text = CoronaNet.query.filter_by(policy_id=policy_id).first().__dict__
     policy_graphs = policy_original_text["original_text"]
     policy_graphs = policy_graphs.replace('\n\n','\n').split('\n')
+    # policy_graphs = policy_graphs.split('\n')
 
     g_id = 0 # the index of a graph
     g_dic={}
     for g in policy_graphs:
-        sentences = g.split('.')
+        sep = '.'
+        sentences = [x + sep for x in g.split(sep)]
+
         # sentences_flag = []
         s_id = 0 # the index of a sentence in a graph
         g_dic[g_id]=[]
         s_dic = {}
         for s in sentences:
+            s.replace("..",".")
             sentence_embeddings = model2.encode([option_text[0]+option_text[1], s])
             score = cosine_similarity(
                         [sentence_embeddings[0]],
