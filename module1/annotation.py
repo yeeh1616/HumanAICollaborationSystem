@@ -121,6 +121,14 @@ def get_highlight_sentences(policy_id, option_text):
 #
 #     return summary
 
+def filter_answer_by_consine_similarity(s1, s2):
+    sentence_embeddings = model2.encode([s1, s2])
+    score = cosine_similarity([sentence_embeddings[0]], sentence_embeddings[1:])[0][0]
+    if score >= 0.5:
+        return True
+    else:
+        return False
+
 def signle_QA2(question, context):
     inputs = tokenizer.encode_plus(question, context, return_tensors="pt")
     answer_start_scores, answer_end_scores = model(**inputs)
@@ -150,18 +158,17 @@ def signle_QA(question, context, model_name):
 
 
 def multi_QA(question, contexts, model_name):
-    answers = ''
+    answers = set([])
     for context in contexts:
         if context == '':
             continue
 
         answer = signle_QA(question, context, model_name)
-        if answer != None and answer != "":
-            if answers == '':
-                answers = answer
-            else:
-                answers = answers + "|" + answer
-    return answers
+        if filter_answer_by_consine_similarity(question, answer):
+            answers.add(answer)
+
+    res = "|".join(answers)
+    return res
 
 
 from sentence_transformers import SentenceTransformer
@@ -306,23 +313,23 @@ def max_cos(option, answers):
     return max
 
 
-def cos(option, answer):
+def cos(s1, s2):
     cosine = 0
 
     options = []
     answers = []
 
-    options.append(option)
-    answers.append(answer)
+    options.append(s1)
+    answers.append(s2)
 
     if len(options) > 0 and len(answers) > 0:
         stopWords = stopwords.words('english')
         vectorizer = CountVectorizer(stop_words=stopWords)
 
-        option = vectorizer.fit_transform(options).toarray()[0]
-        answer = vectorizer.transform(answers).toarray()[0]
+        s1 = vectorizer.fit_transform(options).toarray()[0]
+        s2 = vectorizer.transform(answers).toarray()[0]
 
-        cosine = consine_cal(option, answer)
+        cosine = consine_cal(s1, s2)
 
     return cosine
 
