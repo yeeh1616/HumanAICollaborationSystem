@@ -137,10 +137,10 @@
         "taskType": 1,
         "options":
             [
-                {"id":"q10-option1", "option": "National Level.", "note": "No, it is at the national level", "cos": 0, "checked": "False", "answer": "", "type": 0},
-                {"id":"q10-option2", "option": "Province/State Level.", "note": "Yes it is at the province/state level", "cos": 0, "checked": "False", "answer": "", "type": 0},
-                {"id":"q10-option3", "option": "City/Municipal Level.", "note": "Yes, it is a the city/municipal level", "cos": 0, "checked": "False", "answer": "", "type": 0},
-                {"id":"q10-option4", "option": "Other government level.", "note": "Yes, it is at another governmental level ", "cos": 0, "checked": "False", "answer": "", "type": 0}
+                {"id":"q10-option1", "option": "National Level.", "note": "No, it is at the national level.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"id":"q10-option2", "option": "Province/State Level.", "note": "Yes it is at the province/state level.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"id":"q10-option3", "option": "City/Municipal Level.", "note": "Yes, it is a the city/municipal level.", "cos": 0, "checked": "False", "answer": "", "type": 0},
+                {"id":"q10-option4", "option": "Other government level.", "note": "Yes, it is at another governmental level.", "cos": 0, "checked": "False", "answer": "", "type": 0}
             ],
         "selected": true
     },

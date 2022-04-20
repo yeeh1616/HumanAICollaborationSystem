@@ -28,11 +28,12 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 
-@bp_auth.route('/')
-def hello_world():
-    return render_template('home.html')
+# @bp_auth.route('/')
+# def hello_world():
+#     return render_template('home.html')
 
 
+@bp_auth.route('/', methods=['GET', 'POST'])
 @bp_auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
