@@ -1,13 +1,31 @@
 [
     {
-        "id": "q11",
-        "columnName": "province",
-        "question": "What is the province or country?",
+        "id": "q16",
+        "columnName": "target_region",
+        "question": "Please choose as many applicable regions as possible.",
         "answers": "",
         "has_answer": false,
-        "clarification": "This variable documents the province from which a policy is initiated, if applicable. This variable only takes a value if the response to init country level is ’Provincial’.",
+        "AI_QA_result": "",
+        "clarification": "This variable documents the region or regions that is/are the targets of a particular government policy.",
         "isPrimaryKey": "False",
-        "taskType": 2,
+        "taskType": 1,
+        "options":
+            [
+                {"id":"q16-option1", "option": "Africa.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option2", "option": "ASEAN Countries.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option3", "option": "Asia.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option4", "option": "Central America.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option5", "option": "Europe.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option6", "option": "European Union (with the UK).", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option7", "option": "European Union (without the UK).", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option8", "option": "Latin America.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option9", "option": "Middle East.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option10", "option": "North America.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option11", "option": "Oceania.", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option12", "option": "Schengen Area (with the UK).", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option13", "option": "Schengen Area (without the UK).", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q16-option14", "option": "Other Regions [Text entry].", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": true}
+            ],
         "selected": true
     }
 ]

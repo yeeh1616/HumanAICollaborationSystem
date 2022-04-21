@@ -1,4 +1,20 @@
-function text_change(btn_save_id){
+function text_change(qid, isTextEntry){
+    var div_tb_id = 'tb_' + qid;
+    var div_tb = document.getElementById(div_tb_id);
+
+    if(isTextEntry=="True"){
+        if(div_tb.style["cssText"] == "display: none;"){
+            div_tb.style = "display: inline-block;";
+        }
+    } else {
+        if(div_tb != null){
+            if(div_tb.style["cssText"] == "display: inline-block;"){
+                div_tb.style = "display: none;";
+            }
+        }
+    }
+
+    var btn_save_id = 'btn_save_' + qid;
     var btn_save = document.getElementById(btn_save_id);
     btn_save.disabled = false;
 }

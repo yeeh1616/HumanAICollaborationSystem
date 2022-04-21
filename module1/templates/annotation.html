@@ -21,9 +21,9 @@
 
                         {% for option in q["options"] %}
                             {% if option['checked'] == "True" %}
-                                <input id="{{ option["id"] }}" type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('btn_save_{{ q['id'] }}')" checked >
+                                <input id="{{ option["id"] }}" type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('{{ q['id'] }}', '{{option['isTextEntry']}}')" checked >
                             {% else %}
-                                <input id="{{ option["id"] }}" type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('btn_save_{{ q['id'] }}')" >
+                                <input id="{{ option["id"] }}" type="radio" name="{{ q['id'] }}_answer" value="{{ option['option'] }}" onclick="text_change('{{ q['id'] }}', '{{option['isTextEntry']}}')" >
                             {% endif %}
 
                             <label>{{ option['option'] }}</label><br>
@@ -40,6 +40,10 @@
                                     <span class="label low">{{ option['cos'] }} [AI Recommendation]</span><br><br>
                                 {% endif %}
                             {% endif %}
+
+                            {% if option['isTextEntry']%}
+                                <div id="tb_{{ q['id'] }}" style="display: none;"><textarea></textarea></div>
+                            {% endif %}
                         {% endfor %}
 
                         {% if q['has_answer'] %}
@@ -47,6 +51,7 @@
                         {% else %}
                             <button id="btn_save_{{ q['id'] }}" onclick="save1(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')">Save</button>
                         {% endif %}
+
                         <button onclick="highlighting_multichoice('{{ policy.policy_id }}', '{{ q['id'] }}')">Highlighting</button>
                         <br><br><br>
                     {% elif q['taskType'] == 2 and q["selected"] %}

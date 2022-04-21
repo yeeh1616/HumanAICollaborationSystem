@@ -219,8 +219,9 @@ def get_annotation(policy_id):
         if q["taskType"] == 1:
             options_list = []
             for option in q["options"]:
-                options_list.append(option["option"] if option["note"]=="" else option["note"])
-            q["AI_QA_result"] = multi_choice_QA(policy, options_list)[0]
+                if not option["isTextEntry"]:
+                    options_list.append(option["option"] if option["note"] == "" else option["note"])
+            q["AI_QA_result"] = multi_choice_QA(policy.description, options_list)[0]
             m_cos = 0
             arr = q["AI_QA_result"].tolist()
             # max_cos = round(max(arr), 2)
