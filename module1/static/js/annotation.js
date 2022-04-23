@@ -104,6 +104,25 @@ function highlighting_multichoice(policyId, questionId) {
 }
 
 function save1(btn, qid, pid, column) {
+    var options = document.getElementById(qid + "_op").children;
+
+    for(i=0; i<options.length;i++){
+        if(options[i].nodeName == "INPUT" && options[i].checked){
+            var parmas = '{"pid":"' + pid + '","qid":"' + qid + '","answer":"' + options[i+1].innerHTML + '","column":"' + column + '"}';
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    btn.disabled=true;
+                }
+            };
+            xhttp.open("POST", "/policies/save");
+            xhttp.send(parmas);
+        }
+    }
+}
+
+function save3(btn, qid, pid, column) {
     var answerName = qid + "_answer";
     var options = document.getElementById(answerName);
     var label = document.getElementById(qid + "_label");
