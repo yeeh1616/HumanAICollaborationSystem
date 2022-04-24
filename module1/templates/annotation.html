@@ -53,7 +53,7 @@
 
                                     {% if option['isTextEntry'] %}
                                         {% if option['checked'] == "True" %}
-                                            <div id="tb_{{ q['id'] }}" style="display: inline-block;"><textarea oninput="text_change2('{{ q['id'] }}', '{{ option['isTextEntry'] }}')"></textarea></div>
+                                            <div id="tb_{{ q['id'] }}" style="display: inline-block;"><textarea oninput="text_change2('{{ q['id'] }}', '{{ option['isTextEntry'] }}')" value='{{ q['answers'] }}'>{{ q['answers'] }}</textarea></div>
                                         {% else %}
                                             <div id="tb_{{ q['id'] }}" style="display: none;"><textarea oninput="text_change2('{{ q['id'] }}', '{{ option['isTextEntry'] }}')"></textarea>
                                             </div>

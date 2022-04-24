@@ -132,8 +132,8 @@ function save1(btn, qid, pid, column) {
         if(options[i].nodeName == "INPUT" && options[i].checked){
             var ans = options[i+1].innerHTML;
 
-            if(options[i+3].children[0].nodeName == "TEXTAREA"){
-                ans = options[i+3].children[0].value;
+            if(options[i+3].children[0] != null && options[i+3].children[0].nodeName == "TEXTAREA"){
+                ans = options[i+3].children[0].value + "|[Text entry]";
             }
 
             var parmas = '{"pid":"' + pid + '","qid":"' + qid + '","answer":"' + ans + '","column":"' + column + '"}';

@@ -173,6 +173,20 @@ def save():
     # policy.update_type = data['answer']
     db.session.commit()
 
+    # clear the cache
+    global q_cache
+    q_objs = q_cache[int(data["pid"])]
+
+    for q in q_objs:
+        if q["columnName"] == data['column']:
+            for op in q["options"]:
+                if '[Text entry]' in op['option'] and '[Text entry]' in data['answer']:
+                    op['checked'] = "True"
+                elif op['option'] == data['answer']:
+                    op['checked'] = "True"
+                else:
+                    op['checked'] = "False"
+
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
@@ -347,24 +361,7 @@ def get_annotation(policy_id):
             # max_cos = round(max(arr), 2)
             max_cos = max(arr)
 
-            for i in range(0, len(q["AI_QA_result"])):
-                # q["options"][i]["cos"] = round(q["AI_QA_result"][i])
-                q["options"][i]["cos"] = q["AI_QA_result"][i]
-                if q["AI_QA_result"][i] == max_cos:
-                    q["options"][i]["checked"] = "True"
-
-            # for option in q["options"]:
-            #     option_text = option["option"]
-            #     cosine_similarity = max_cos(option_text, q["AI_QA_result"])
-            #
-            #     # cosine_similarity = 0.8
-            #
-            #     option["cos"] = cosine_similarity
-            #
-            #     if m_cos < cosine_similarity:
-            #         m_cos = cosine_similarity
-
-            if obj_property is None and obj_property == "":
+            if obj_property is None or obj_property == "":
                 for option in q["options"]:
                     if m_cos == option["cos"]:
                         q["answers"] = option["option"]
@@ -372,21 +369,30 @@ def get_annotation(policy_id):
                 q["answers"] = obj_property
                 has_answer = True
 
-                # tmp = option["cosine_similarity"]
-                # print(cosine_similarity)
-                # print(tmp)
-
             if has_answer:
-                for option in q["options"]:
-                    if option["option"] == q["answers"]:
-                        option["checked"] = "True"
-                        option["type"] = 1
-                        break
+                for i in range(0, len(q["AI_QA_result"])):
+                    q["options"][i]["cos"] = q["AI_QA_result"][i]
                 for option in q["options"]:
                     if option["cos"] == max_cos:
                         option["type"] = 2
                         break
+                for option in q["options"]:
+                    if "[Text entry]" in option["option"] and "[Text entry]" in q["answers"]:
+                        option["checked"] = "True"
+                        option["type"] = 1
+                        q["answers"] = q["answers"].split("|")[0]
+                        break
+                    elif option["option"] == q["answers"]:
+                        option["checked"] = "True"
+                        option["type"] = 1
+                        break
             else:
+                for i in range(0, len(q["AI_QA_result"])):
+                    # q["options"][i]["cos"] = round(q["AI_QA_result"][i])
+                    q["options"][i]["cos"] = q["AI_QA_result"][i]
+                    if q["AI_QA_result"][i] == max_cos:
+                        q["options"][i]["checked"] = "True"
+
                 for option in q["options"]:
                     if option["cos"] == max_cos:
                         option["checked"] = "True"
