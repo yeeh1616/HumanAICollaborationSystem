@@ -2,9 +2,19 @@ function text_change(qid, isTextEntry){
     var div_tb_id = 'tb_' + qid;
     var div_tb = document.getElementById(div_tb_id);
 
+    var btn_save_id = 'btn_save_' + qid;
+    var btn_save = document.getElementById(btn_save_id);
+
     if(isTextEntry=="True"){
         if(div_tb.style["cssText"] == "display: none;"){
             div_tb.style = "display: inline-block;";
+            var ta = div_tb.children[0];
+
+            if(ta.innerHTML == ""){
+                btn_save.disabled = true;
+            }else {
+                btn_save.disabled = false;
+            }
         }
     } else {
         if(div_tb != null){
@@ -12,11 +22,23 @@ function text_change(qid, isTextEntry){
                 div_tb.style = "display: none;";
             }
         }
+        btn_save.disabled = false;
     }
+}
 
+function text_change2(qid){
     var btn_save_id = 'btn_save_' + qid;
     var btn_save = document.getElementById(btn_save_id);
-    btn_save.disabled = false;
+
+    var div_tb_id = 'tb_' + qid;
+    var div_tb = document.getElementById(div_tb_id);
+    var ta = div_tb.children[0];
+
+    if(ta.value == ""){
+        btn_save.disabled = true;
+    }else {
+        btn_save.disabled = false;
+    }
 }
 
 function highlighting(qid,answerStr) {
@@ -41,7 +63,7 @@ function highlighting(qid,answerStr) {
 }
 
 function highlighting_multichoice(policyId, questionId) {
-    // 1. 找到policy文本的div对象
+    // 1. get the div obj of the policy text
     var policyNode = document.getElementById("summary");
 
     var ele = document.getElementsByName(questionId+'_answer');
@@ -70,13 +92,13 @@ function highlighting_multichoice(policyId, questionId) {
                     var sentence = sen["sentence"];
                     var score = parseFloat(sen["score"].substring(0,3));
 
-                    // 3. 生成一个span对象，加在div对象
+                    // 3. generate a span obj and add it to the end of div
                     var span = document.createElement("span");
                     span.innerHTML = sentence;
-                    // 4. 如果score >= 0.8
-                    // 5. 如果socre >= 0.7
-                    // 6. 如果socre >= 0.5
-                    // 7. 如果socre < 0.5
+                    // 4. if score >= 0.8
+                    // 5. if socre >= 0.7
+                    // 6. if socre >= 0.5
+                    // 7. if socre < 0.5
                     if(score>=0.9){
                         span.style.backgroundColor = '#ff9f00';
                     }else if(score>=0.8 && score<0.9){
@@ -108,7 +130,13 @@ function save1(btn, qid, pid, column) {
 
     for(i=0; i<options.length;i++){
         if(options[i].nodeName == "INPUT" && options[i].checked){
-            var parmas = '{"pid":"' + pid + '","qid":"' + qid + '","answer":"' + options[i+1].innerHTML + '","column":"' + column + '"}';
+            var ans = options[i+1].innerHTML;
+
+            if(options[i+3].children[0].nodeName == "TEXTAREA"){
+                ans = options[i+3].children[0].value;
+            }
+
+            var parmas = '{"pid":"' + pid + '","qid":"' + qid + '","answer":"' + ans + '","column":"' + column + '"}';
 
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
