@@ -1,78 +1,77 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .row {
-  margin-left:-5px;
-  margin-right:-5px;
+    margin-left: -5px;
+    margin-right: -5px;
 }
 
 .column {
-  float: left;
-  width: 50%;
-  padding: 5px;
+    float: left;
+    width: 50%;
+    padding: 5px;
 }
 
 /* Clearfix (clear floats) */
 .row::after {
-  content: "";
-  clear: both;
-  display: table;
+    content: "";
+    clear: both;
+    display: table;
 }
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
 }
 
 th, td {
-  text-align: left;
-  padding: 16px;
+    text-align: left;
+    padding: 16px;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
-
 
 
 /* Style the table */
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
 }
 
 /* Style table headers and table data */
 th, td {
-  text-align: center;
-  padding: 16px;
+    text-align: center;
+    padding: 16px;
 }
 
 th:first-child, td:first-child {
-  text-align: left;
+    text-align: left;
 }
 
 /* Zebra-striped table rows */
 tr:nth-child(even) {
-  background-color: #f2f2f2
+    background-color: #f2f2f2
 }
 
 .fa-check {
-  color: green;
+    color: green;
 }
 
 .fa-remove {
-  color: red;
+    color: red;
 }
 
 div.ex1 {
     font-size: 18px;
     background-color: white;
-    height: 800px;
+    height: 600px;
     width: 900px;
     overflow-y: scroll;
 }
@@ -87,18 +86,105 @@ div.ex2 {
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other on screens that are smaller than 600 px */
 @media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
+    .column {
+        width: 100%;
+    }
 }
 
 .label {
-  color: white;
-  padding: 2px;
-  font-family: Arial;
+    color: white;
+    padding: 2px;
+    font-family: Arial;
 }
-.high {background-color: #04AA6D;} /* Green */
-.info {background-color: #2196F3;} /* Blue */
-.middle {background-color: #ff9800;} /* Orange */
-.low {background-color: #f44336;} /* Red */
-.other {background-color: #e7e7e7; color: black;} /* Gray */
+
+.high {
+    background-color: #04AA6D;
+}
+
+/* Green */
+.info {
+    background-color: #2196F3;
+}
+
+/* Blue */
+.middle {
+    background-color: #ff9800;
+}
+
+/* Orange */
+.low {
+    background-color: #f44336;
+}
+
+/* Red */
+.other {
+    background-color: #e7e7e7;
+    color: black;
+}
+
+/* Gray */
+
+.grid {
+    display: block;
+}
+
+.box1 {
+    color: white;
+    font-size: 1vw;
+    padding: 10px;
+    background: yellowgreen;
+    margin: 10px 0;
+    text-align: center;
+}
+.box2 {
+    color: white;
+    font-size: 1vw;
+    padding: 10px;
+    background: #991a1a;
+    margin: 10px 0;
+    text-align: center;
+}
+
+@media screen and (min-width: 576px) {
+    .grid {
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(12, 1fr);
+        grid-gap: 10px;
+    }
+
+    .box {
+        margin: 0;
+    }
+
+    .box:nth-child(1) {
+        grid-column: span 12;
+    }
+
+    .box:nth-child(2),
+    .box:nth-child(3) {
+        grid-column: span 6;
+    }
+
+    .box:nth-child(4),
+    .box:nth-child(5),
+    .box:nth-child(6) {
+        grid-column: span 4;
+    }
+
+    .box:nth-child(7),
+    .box:nth-child(8),
+    .box:nth-child(9),
+    .box:nth-child(10) {
+        grid-column: span 3;
+    }
+
+    .box:nth-child(11),
+    .box:nth-child(12),
+    .box:nth-child(13),
+    .box:nth-child(14),
+    .box:nth-child(15),
+    .box:nth-child(16) {
+        grid-column: span 2;
+    }
+}

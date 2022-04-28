@@ -27,5 +27,53 @@
                 {"id":"q16-option14", "option": "Other Regions [Text entry].", "note": "", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": true}
             ],
         "selected": true
+    },
+    {
+        "id": "q17",
+        "columnName": "target_city",
+        "question": "Please write in what cities/municipalities this policy is targeted towards.",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the city that is/are the target of a particular government policy, if applicable. Note, it only takes on a value if [target geog level] == \"One or more cities within one or more countries\".",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q18",
+        "columnName": "target_other",
+        "question": "Please write in what other geographic or administrative unit this policy is targeted towards.",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the subnational region or regions that is/are the target of a particular government policy which are not provinces or cities. Note, it only takes on a value if [target geog level] == ‘One or more geographical or administrative units (other than provincial or city level units) within one or more countries”",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q19",
+        "columnName": "target_who_what",
+        "question": "Please select from the list below what or whom the policy is targeted at.",
+        "answers": "",
+        "has_answer": false,
+        "AI_QA_result": "",
+        "clarification": "This variable codes the people or materials who are the target of a particular policy.",
+        "isPrimaryKey": "False",
+        "taskType": 1,
+        "options":
+            [
+                {"id":"q19-option1", "option": "All (Travelers + Residents).", "note": "Government policy that applies to all humans regardless of residency or travel status.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option2", "option": "All Travelers (Citizen Travelers + Foreign Travelers).", "note": "Government policy targeted toward all travelers, both foreign and domestic.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option3", "option": "Citizen Travelers.", "note": "A government policy that applies only to domestic nationals travelling outside the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option4", "option": "Foreign Travelers.", "note": "A government policy that applies to only to foreign nationals travelling outside the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option5", "option": "All Residents (Citizen Residents + Foreign Residents).", "note": "Government policy targeted toward residents, both foreign nationals and domestic nationals, in the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option6", "option": "Citizen Residents.", "note": "Government policies that apply only to citizens who are residing in the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option7", "option": "Foreign Residents.", "note": "Government policies that that apply only to foreign nationals who are residing in the country in initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option8", "option": "All Foreign Nationals.", "note": "Government policies that that apply only to foreign nationals who are residing in the country in initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option9", "option": "All Citizens.", "note": "Individuals with citizenship or permanent residency in the country initiating the policy.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option10", "option": "Health Staff.", "note": "Government policy targeted toward human health staff.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false},
+                {"id":"q19-option11", "option": "Health related supplies.", "note": "Government policy targeted toward health related supplies.", "cos": 0, "checked": "False", "answer": "", "type": 0, "isTextEntry": false}
+            ],
+        "selected": true
     }
 ]

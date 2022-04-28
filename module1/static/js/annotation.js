@@ -141,6 +141,15 @@ function save1(btn, qid, pid, column) {
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
+                    var json = xhttp.responseText;
+                    var obj = JSON.parse(json);
+
+                    var complete = document.getElementById("complete");
+                    complete.innerHTML = "Complete: " + obj["complete"] + "/" + obj["total"];
+
+                    var q = document.getElementById("ap_" + qid);
+                    q.className="box1";
+
                     btn.disabled=true;
                 }
             };

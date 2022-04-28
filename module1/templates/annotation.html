@@ -10,9 +10,11 @@
     <div class="column">
         <div class="column">
             <h1>Annotation tasks</h1>
-            <div class="ex1">
+            <div>
+                <div class="ex1">
                 {% for q in questions %}
                     <div id="{{ q['id'] }}">
+                        <h2>{{ q['id'] }}：</h2>
                         {% if q['taskType'] == 1 and q["selected"] %}
                             <h2>{{ q['columnName'] }}</h2>
                             <p>Question: {{ q['question'] }}</p>
@@ -106,6 +108,24 @@
                     </div>
                 {% endfor %}
             </div>
+                <div style="height: 200px">
+                    <main class="grid">
+                    <div id="complete">Complete: {{ complete }}/{{ total }}</div>
+                        {% for k in annotation_progress %}
+                            {% if annotation_progress[k] %}
+                                <div class="box1" id="ap_{{ k }}">
+                                    {{ k }}
+                                </div>
+                            {% else %}
+                                <div class="box2" id="ap_{{ k }}">
+                                    {{ k }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </main>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="column">
