@@ -41,7 +41,16 @@ function text_change2(qid){
     }
 }
 
+function text_change3(btn_save_id){
+    var btn_save = document.getElementById(btn_save_id);
+    btn_save.disabled = false;
+}
+
 function highlighting(qid,answerStr) {
+    if(answerStr == ""){
+        return;
+    }
+
     let divs = document.getElementById("summary").children;
     let answers = answerStr.split("|");
 
@@ -193,6 +202,6 @@ function save2(btn, qid, pid, column) {
             btn.disabled=true;
         }
     };
-    xhttp.open("POST", "/policies/save");
+    xhttp.open("POST", "/policies/save2");
     xhttp.send(parmas);
 }

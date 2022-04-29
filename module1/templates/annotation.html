@@ -85,8 +85,9 @@
                             <h2>{{ q['columnName'] }}</h2>
                             <p>Question: {{ q['question'] }}</p>
                             <p>Clarification: {{ q['clarification'] }}</p>
+                            <div><p>AI Recommendation: {{ q["answers"] }}</p></div>
                             <textarea id="{{ q['id'] }}_answer" name="{{ q['id'] }}_answer"
-                                      onkeyup="text_change('btn_save_{{ q['id'] }}')">{{ q["answers"] }}</textarea>
+                                      onkeyup="text_change3('btn_save_{{ q['id'] }}')">{{ q["answers"] }}</textarea>
                             <br><br>
                             <div>
                                 {% if q['has_answer'] %}

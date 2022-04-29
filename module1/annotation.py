@@ -201,6 +201,35 @@ def save():
     return json.dumps({'success': True, 'complete': a, 'total': b}), 200, {'ContentType': 'application/json'}
 
 
+@bp_annotation.route("/policies/save2", methods=['POST'])
+@login_required
+def save2():
+    dataJson = request.data.decode("utf-8")
+    data = json.loads(dataJson)
+
+    policy = db.session.query(CoronaNet).filter_by(policy_id=data["pid"]).first()
+
+    policy = setValue(policy, data['column'], data['answer'])
+    db.session.commit()
+
+    # clear the cache
+    global q_cache
+    global annotation_progress
+    q_objs = q_cache[int(data["pid"])]
+
+    for q in q_objs:
+        if q["columnName"] == data['column']:
+            q["answers"] = data['answer']
+            q["has_answer"] = True
+            pass
+
+    pid = int(data["pid"])
+    qid = data["qid"]
+    annotation_progress[pid][qid] = True
+    a, b = get_annotation_progress(pid)
+    return json.dumps({'success': True, 'complete': a, 'total': b}), 200, {'ContentType': 'application/json'}
+
+
 @bp_annotation.route("/policies/highlighting", methods=['POST'])
 @login_required
 def get_highlighting_text():
