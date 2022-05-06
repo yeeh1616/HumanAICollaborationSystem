@@ -1,0 +1,83 @@
+#username, #password {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,.24);
+    margin-bottom: 30px;
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    display: block;
+    height: 45px;
+    background: 0 0;
+    border-bottom: 2px solid rgba(255,255,255,.24);
+    margin-bottom: 30px;
+}
+
+#submit {
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 20px;
+    background: #ffffff;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s;
+}
+
+.login100 {
+    width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 55px 55px 37px;
+    background: #9152f8;
+    background: -webkit-linear-gradient(top,#7579ff,#b224ef);
+}
+
+.signupDiv {
+    padding-top: 90px;
+}
+
+.signupA {
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    color: #e5e5e5;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.container-login100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.login100-form-title {
+    font-family: Poppins-Medium;
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+}

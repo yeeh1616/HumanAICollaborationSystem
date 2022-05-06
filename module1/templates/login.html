@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Human-AI</title>
+    <link rel="stylesheet" href="../../static/css/home.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <div>
+    <div class="container-login100">
+        <div class="login100">
         <form method="POST" action="" class="loginform">
+            <span class="login100-form-title">Login</span>
             <div>
                 {{ form.hidden_tag() }}
             </div>
@@ -22,7 +24,10 @@
             </div>
         </form>
 
-        <a href="{{ url_for('auth.register') }}">Sign Up</a>
+        <div class="signupDiv">
+            <a class="signupA" href="{{ url_for('auth.register') }}">Sign Up</a>
+        </div>
+    </div>
     </div>
 </body>
 </html>
