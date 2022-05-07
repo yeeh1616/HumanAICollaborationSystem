@@ -9,9 +9,12 @@
     line-height: 1.2;
     display: block;
     height: 45px;
-    background: 0 0;
+    background: transparent;
+    border: none;
     border-bottom: 2px solid rgba(255,255,255,.24);
     margin-bottom: 30px;
+    padding-bottom: 34px;
+    padding-top: 27px;
 }
 
 #submit {
@@ -25,11 +28,12 @@
     padding: 0 20px;
     min-width: 120px;
     height: 50px;
-    border-radius: 20px;
+    border-radius: 25px;
     background: #ffffff;
     position: relative;
     z-index: 1;
     transition: all 0.4s;
+    border: none;
 }
 
 .login100 {
