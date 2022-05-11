@@ -80,3 +80,8 @@ div.ex1 {
     width: 100%;
   }
 }
+
+.policyListMain {
+  display: flex;
+  justify-content: center;
+}

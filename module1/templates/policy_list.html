@@ -6,41 +6,43 @@
 <body>
 <a href="{{ url_for('auth.logout') }}">Logout</a>
 <a href="{{ url_for('configuration.show') }}">Configuration</a>
-<h1>Select a policy for annotation:</h1>
 
 
-<div>
-<table class="table table-hover" style="width: 700px;">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Policy Id</th>
-      <th scope="col">Description</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for policy in policy_list.items %}
-        <tr>
-          <td>{{ policy.policyId }}</td>
-          <td>{{ policy.description }}</td>
-          <td>{{ policy.get_status() }}</td>
-          <td>
-            <a
-              href="{{ url_for('summary.get_summary', policy_id=policy.policy_id) }}"
-              class="btn btn-outline-primary"
-              role="button"
-            >
-              Edit
-            </a>
-          </td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% for page_num in policy_list.iter_pages(left_edge=1, right_edge=1,
+<div class="policyListMain">
+    <div>
+        <h1>Select a policy for annotation:</h1>
+        <table class="table table-hover" style="width: 700px;">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Policy Id</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for policy in policy_list.items %}
+                <tr>
+                    <td>{{ policy.policyId }}</td>
+                    <td>{{ policy.description }}</td>
+                    <td>{{ policy.get_status() }}</td>
+                    <td>
+                        <a
+                                href="{{ url_for('summary.get_summary', policy_id=policy.policy_id) }}"
+                                class="btn btn-outline-primary"
+                                role="button"
+                        >
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% for page_num in policy_list.iter_pages(left_edge=1, right_edge=1,
 left_current=1, right_current=1) %} {% if page_num %} {% if policy_list.page ==
 page_num %}
-{% endif %} {% else %} ... {% endif %} {% endfor %}
+        {% endif %} {% else %} ... {% endif %} {% endfor %}
+    </div>
 </div>
 </body>
 </html>
