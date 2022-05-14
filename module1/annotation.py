@@ -1,5 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
 from sklearn.feature_extraction.text import CountVectorizer
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 from flask import Blueprint, render_template
 from flask_login import login_required
 from module1.models import CoronaNet
@@ -11,11 +13,13 @@ import numpy.linalg as LA
 import numpy as np
 import torch
 import json
+import re
 
 bp_annotation = Blueprint('annotation', __name__)
 
 tokenizer = AutoTokenizer.from_pretrained("deepset/bert-base-cased-squad2")
 model = AutoModelForQuestionAnswering.from_pretrained("deepset/bert-base-cased-squad2")
+model2 = SentenceTransformer('bert-base-nli-mean-tokens')
 
 q_cache = {} # policy's json object cache
 p_cache = {} # policy's text cache
@@ -176,7 +180,6 @@ def save():
     policy = db.session.query(CoronaNet).filter_by(policy_id=data["pid"]).first()
 
     policy = setValue(policy, data['column'], data['answer'])
-    # policy.update_type = data['answer']
     db.session.commit()
 
     # clear the cache
@@ -248,16 +251,11 @@ def get_highlighting_text():
 
     return p_cache[question_id]
 
-import json
+
 def get_highlight_sentences(policy_id, option_text):
-    '''
-        1.
-    '''
-    # policy_text = []
     policy_original_text = CoronaNet.query.filter_by(policy_id=policy_id).first().__dict__
     policy_graphs = policy_original_text["original_text"]
     policy_graphs = policy_graphs.replace('\n\n','\n').split('\n')
-    # policy_graphs = policy_graphs.split('\n')
 
     g_id = 0 # the index of a graph
     g_dic={}
@@ -265,7 +263,6 @@ def get_highlight_sentences(policy_id, option_text):
         sep = '.'
         sentences = [x + sep for x in g.split(sep)]
 
-        # sentences_flag = []
         s_id = 0 # the index of a sentence in a graph
         g_dic[g_id]=[]
         s_dic = {}
@@ -273,27 +270,15 @@ def get_highlight_sentences(policy_id, option_text):
             s.replace("..",".")
             sentence_embeddings = model2.encode([option_text[0]+option_text[1], s])
             score = cosine_similarity(
-                        [sentence_embeddings[0]],
-                        sentence_embeddings[1:]
-                    )
-            # sentences_flag.append((s, True if score > 0.5 else False))
-            # sentences_flag.append((s, score[0][0]))
+                [sentence_embeddings[0]],
+                sentence_embeddings[1:]
+            )
             g_dic[g_id].append({"sentence_id":s_id, "sentence":s, "score":str(score[0][0])})
             s_id = s_id + 1
-        # policy_text.append(g_dic)
         g_id = g_id + 1
     policy_text = json.dumps(g_dic)
     return policy_text
 
-
-# @bp_annotation.route("/policies/get_highlighting_text", methods=['GET', 'POST'])
-# @login_required
-# def get_highlighting_text():
-#     data = request.data.decode("utf-8").split("------")
-#     policy_id = data[0]
-#     summary = data[1]
-#
-#     return summary
 
 def filter_answer_by_consine_similarity(s1, s2):
     sentence_embeddings = model2.encode([s1, s2])
@@ -344,10 +329,6 @@ def multi_QA(question, contexts, model_name):
     res = "|".join(answers)
     return res
 
-
-from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
-model2 = SentenceTransformer('bert-base-nli-mean-tokens')
 
 def multi_choice_QA(policy, options_list):
     options_list.insert(0, policy)
@@ -460,7 +441,7 @@ def get_annotation(policy_id):
     a, b = get_annotation_progress(policy_id)
     return render_template('annotation.html', policy=policy, questions=q_objs, summary_list=summary_list, graph_list=graph_list, annotation_progress=annotation_progress[policy_id], complete=a, total=b)
 
-import re
+
 def get_policy_obj(policy):
     i = 0
     j = 0
