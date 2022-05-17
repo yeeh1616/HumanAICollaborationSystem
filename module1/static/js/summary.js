@@ -20,7 +20,7 @@ function summary_change() {
     btn_save.disabled = false;
 }
 
-function reload_summary(pid) {
+function reload_summary(pid, des) {
     var btn = document.getElementById("btn_reload");
 
     if(btn.innerHTML=="Reload Summary"){
@@ -35,7 +35,7 @@ function reload_summary(pid) {
         btn.innerHTML="Recover Summary";
         document.getElementById("save_summary").disabled = false;
     }else {
-        document.getElementById("w3review").value = "{{ policy.description }}";
+        document.getElementById("w3review").value = des;
         btn.innerHTML="Reload Summary";
         document.getElementById("save_summary").disabled = true;
     }
