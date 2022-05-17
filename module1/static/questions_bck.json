@@ -23,17 +23,6 @@
         "selected": false
     },
     {
-        "id": "q9",
-        "columnName": "country",
-        "question": "What is the country?",
-        "answers": "",
-        "has_answer": false,
-        "clarification": "This variable documents the country in which a particular government policy is initiated. This variable always takes a value irrespective of what level of government the policy was made at (init country level).",
-        "isPrimaryKey": "False",
-        "taskType": 2,
-        "selected": true
-    },
-    {
         "id": "q3",
         "columnName": "entry_type",
         "question": "Is it updated one?",
@@ -121,6 +110,17 @@
         "answers": "",
         "has_answer": false,
         "clarification": "This variable documents the date that the government policy was announced.",
+        "isPrimaryKey": "False",
+        "taskType": 2,
+        "selected": true
+    },
+    {
+        "id": "q9",
+        "columnName": "country",
+        "question": "What is the country?",
+        "answers": "",
+        "has_answer": false,
+        "clarification": "This variable documents the country in which a particular government policy is initiated. This variable always takes a value irrespective of what level of government the policy was made at (init country level).",
         "isPrimaryKey": "False",
         "taskType": 2,
         "selected": true

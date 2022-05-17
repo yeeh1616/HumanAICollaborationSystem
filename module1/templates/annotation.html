@@ -14,8 +14,8 @@
                 <div class="ex1">
                 {% for q in questions %}
                     <div id="{{ q['id'] }}">
-                        <h2>{{ q['id'] }}：</h2>
                         {% if q['taskType'] == 1 and q["selected"] %}
+                            <h2>{{ q['id'] }}：</h2>
                             <h2>{{ q['columnName'] }}</h2>
                             <p>Question: {{ q['question'] }}</p>
                             <p>Clarification: {{ q['clarification'] }}</p>
@@ -82,6 +82,7 @@
                             </div>
                             <br><br><br>
                         {% elif q['taskType'] == 2 and q["selected"] %}
+                            <h2>{{ q['id'] }}：</h2>
                             <h2>{{ q['columnName'] }}</h2>
                             <p>Question: {{ q['question'] }}</p>
                             <p>Clarification: {{ q['clarification'] }}</p>
@@ -93,7 +94,7 @@
                                 {% if q['has_answer'] %}
                                     <button id="btn_save_{{ q['id'] }}"
                                             onclick="save2(this, '{{ q['id'] }}', '{{ policy.policy_id }}', '{{ q['columnName'] }}')"
-                                            disabled>Save
+                                            >Save
                                     </button>
                                 {% else %}
                                     <button id="btn_save_{{ q['id'] }}"
@@ -145,6 +146,6 @@
         </div>
     </div>
 </div>
-<button><a href="{{ url_for('annotation.view', policy_id=policy.policy_id) }}">Save all</a></button>
+<button><a href="{{ url_for('annotation.view', policy_id=policy.policy_id) }}">Results</a></button>
 </body>
 </html>
