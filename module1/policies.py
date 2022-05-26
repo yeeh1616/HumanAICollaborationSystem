@@ -5,7 +5,7 @@ from module1.models import CoronaNet
 bp_policies = Blueprint('policies', __name__)
 
 
-@bp_policies.route("/policies/<int:policy_id>/search", methods=['GET', 'POST'])
+@bp_policies.route("/policies/<string:policy_id>/search", methods=['GET', 'POST'])
 @login_required
 def search(policy_id):
     policy_list = CoronaNet.query.filter_by(policy_id=policy_id).paginate(page=1, per_page=10)
