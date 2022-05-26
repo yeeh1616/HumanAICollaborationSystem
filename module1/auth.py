@@ -54,7 +54,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('auth.login'))
 
 
 @bp_auth.route('/register', methods=['GET', 'POST'])
@@ -68,6 +68,6 @@ def register():
         print(hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
     return render_template('register.html', form=form)
