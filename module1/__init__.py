@@ -37,4 +37,7 @@ def create_app():
     from .configuration import bp_configuration as configuration_blueprint
     app.register_blueprint(configuration_blueprint)
 
+    from .policies import bp_policies as policies_blueprint
+    app.register_blueprint(policies_blueprint)
+
     return app

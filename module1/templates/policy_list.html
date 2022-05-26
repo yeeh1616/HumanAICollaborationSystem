@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="../../static/css/policylist.css">
+    <script src="../../static/js/policies.js"></script>
 </head>
 <body>
 <a href="{{ url_for('auth.logout') }}">Logout</a>
@@ -11,6 +12,11 @@
 <div class="policyListMain">
     <div>
         <h1>Select a policy for annotation:</h1>
+        <div id="searchDiv">
+            <input id="pidSearch"></input>
+            <button id="btnSearch" onclick="search()">Search</button>
+        </div>
+
         <table class="table table-hover" style="width: 700px;">
             <thead class="thead-dark">
             <tr>

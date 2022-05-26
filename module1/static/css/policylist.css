@@ -85,3 +85,33 @@ div.ex1 {
   display: flex;
   justify-content: center;
 }
+
+#pidSearch {
+  border: 1px solid #aaa;
+  font-size: 16px;
+  padding: 10px 10px;
+  width: 60%;
+  background: #fff;
+  padding-left: 15px;
+  border-radius: 10px;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+#searchDiv {
+  padding-bottom: 20px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+#btnSearch {
+  border:none;
+  color: #FFFFFF;
+  background-color: #4CAF50;
+  background-color: #04AA6D!important;
+  border-radius: 10px;
+  font-size: 17px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 6px 18px;
+}
