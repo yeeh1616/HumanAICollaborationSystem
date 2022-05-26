@@ -1,4 +1,4 @@
-function save_summary(pid) {
+function save_summary(pid, f1) {
     var summary = document.getElementById("w3review").value;
     var parmas = pid + "------" + summary;
 
@@ -8,7 +8,7 @@ function save_summary(pid) {
              var btn_save = document.getElementById("save_summary");
              var btn_next = document.getElementById("next");
              btn_save.disabled = true;
-             btn_next.disabled = false;
+             btn_next.disabled = f1;
         }
     };
     xhttp.open("POST", "/policies/save_summary");
@@ -39,4 +39,13 @@ function reload_summary(pid, des) {
         btn.innerHTML="Reload Summary";
         document.getElementById("save_summary").disabled = true;
     }
+}
+
+function goToAnnoation(pid, url){
+    document.getElementById("w3review").disabled = true;
+    document.getElementById("save_summary").disabled = true;
+    document.getElementById("btn_reload").disabled = true;
+
+    save_summary(pid, true);
+    location.replace(url);
 }

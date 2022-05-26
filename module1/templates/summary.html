@@ -25,16 +25,12 @@
     </div>
 
     {% if has_summary %}
-        <button id="save_summary" class="btn btn-outline-primary" onclick="save_summary('{{ policy.policy_id }}')" disabled=true>Save</button>
+        <button id="save_summary" class="btn btn-outline-primary" onclick="save_summary('{{ policy.policy_id }}', true)" disabled=true>Save</button>
     {% else %}
-        <button id="save_summary" class="btn btn-outline-primary" onclick="save_summary('{{ policy.policy_id }}')">Save</button>
+        <button id="save_summary" class="btn btn-outline-primary" onclick="save_summary('{{ policy.policy_id }}', true)">Save</button>
     {% endif %}
 
     <button id="btn_reload" onclick="reload_summary('{{ policy.policy_id }}', '{{ policy.description }}')">Reload Summary</button>
-    <button id="next">
-        <a href="{{ url_for('annotation.get_annotation', policy_id=policy.policy_id) }}"
-            class="btn btn-outline-primary"
-            role="button">Go to annotation</a>
-    </button>
+    <button id="next" onclick="goToAnnoation('{{ policy.policy_id }}', '{{ url_for('annotation.get_annotation', policy_id=policy.policy_id) }}')">Go to annotation</button>
 </body>
 </html>

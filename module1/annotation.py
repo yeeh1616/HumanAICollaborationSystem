@@ -506,6 +506,14 @@ def view(policy_id):
     return render_template('view.html', policy=policy)
 
 
+@bp_annotation.route("/backToPolicy", methods=['GET', 'POST'])
+@login_required
+def backToPolicy():
+    policy_list = CoronaNet.query.paginate(page=1, per_page=10)
+
+    return render_template('policy_list.html', policy_list=policy_list)
+
+
 def get_annotation_progress(pid):
     global annotation_progress
     a = 0

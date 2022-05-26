@@ -23,6 +23,8 @@
     </style>
 </head>
 <body>
+    <button><a href="{{ url_for('annotation.get_annotation', policy_id=policy.policy_id) }}">Back</a></button>
+    <button><a href="{{ url_for('annotation.backToPolicy', policy_id=policy.policy_id) }}">Done</a></button>
     <h2>{{ policy['policy_id'] }}</h2>
     <table>
         <tr>
