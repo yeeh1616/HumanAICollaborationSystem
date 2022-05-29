@@ -13,7 +13,7 @@ def getAllPolicies(search=False):
 
     policies_count = CoronaNet.query.count()
     # policy_list = CoronaNet.query.all()
-    per_page = 2
+    per_page = 10
     policy_list = CoronaNet.query.paginate(page=page, per_page=per_page).items
     pagination = Pagination(page=page,
                             total=policies_count,
