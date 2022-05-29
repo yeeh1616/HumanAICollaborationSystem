@@ -43,10 +43,13 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
 
-                page = request.args.get('page', 1, type=int)
-                policy_list = CoronaNet.query.paginate(page=page, per_page=10)
-
-                return render_template('policy_list.html', policy_list=policy_list)
+                # page = request.args.get('page', 1, type=int)
+                # policy_list = CoronaNet.query.paginate(page=page, per_page=10)
+                #
+                # return render_template('policy_list.html', policy_list=policy_list)
+                # redirect('/policies/all?q=true')
+                from module1 import policies
+                return policies.getAllPolicies(True)
     return render_template('login.html', form=form)
 
 
