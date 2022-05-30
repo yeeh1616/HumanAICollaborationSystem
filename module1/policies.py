@@ -9,8 +9,6 @@ per_page = 10
 @bp_policies.route("/policies/all", methods=['GET', 'POST'])
 @login_required
 def getAllPolicies():
-    # search = bool(request.args.get('q'))
-    # search = request.form.get('q')
     page = request.args.get(get_page_parameter(), type=int, default=1)
     policies_count = CoronaNet.query.count()
 

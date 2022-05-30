@@ -15,6 +15,7 @@ bp_summary = Blueprint('summary', __name__)
 tokenizer = AutoTokenizer.from_pretrained("deepset/bert-base-cased-squad2")
 model = AutoModelForQuestionAnswering.from_pretrained("deepset/bert-base-cased-squad2")
 
+nltk.download('stopwords')
 
 @bp_summary.route("/policies/save_summary", methods=['POST'])
 @login_required
