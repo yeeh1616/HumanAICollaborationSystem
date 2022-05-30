@@ -11,6 +11,7 @@ RUN pip3 install transformers
 RUN pip3 install nltk
 RUN pip3 install torch
 RUN pip3 install sklearn
+RUN pip3 install sentence_transformers
 RUN pip3 install -U flask-paginate
 
 WORKDIR /app
