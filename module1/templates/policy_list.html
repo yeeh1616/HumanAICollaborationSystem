@@ -28,7 +28,7 @@
                 {% for policy in policy_list %}
                     <tr>
                         <td>{{ policy.policy_id }}</td>
-                        <td>{{ policy.description }}</td>
+                        <td></td>
                         <td>{{ policy.get_status() }}</td>
                         <td>
                             <a
@@ -43,6 +43,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {{ pagination.info }}
             {{ pagination.links }}
         </div>
     </div>

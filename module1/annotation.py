@@ -42,10 +42,10 @@ def get_option_text_by_qid(policy_id, question_id, option_id):
 
 
 def setValue(policy, columnName, answer):
-    if columnName == 'record_id':
-        policy.record_id = answer
+    # if columnName == 'record_id':
+    #     policy.record_id = answer
 
-    elif columnName == 'policy_id':
+    if columnName == 'policy_id':
         policy.policy_id = answer
 
     elif columnName == 'entry_type':

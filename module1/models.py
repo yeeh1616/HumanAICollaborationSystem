@@ -11,8 +11,8 @@ class User(db.Model, UserMixin):
 
 class CoronaNet(db.Model):
     __tablename__ = 'corona_net'
-    record_id = db.Column(db.Text, primary_key=True)
-    policy_id = db.Column(db.Text, nullable=False)
+    # record_id = db.Column(db.Text, primary_key=True)
+    policy_id = db.Column(db.Integer, primary_key=True)
     entry_type = db.Column(db.Text, nullable=False)
     correct_type = db.Column(db.Text, nullable=False)
     update_type = db.Column(db.Text, nullable=False)

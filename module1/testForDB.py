@@ -15,7 +15,7 @@ def test01():
             original_text = row[40]
             original_text = original_text.replace('\'', '\'\'')
             sql_insert = "INSERT INTO corona_net (policy_id, original_text) \
-                      VALUES ('{}', '{}');".format(id, original_text)
+                      VALUES ({}, '{}');".format(id, original_text)
 
             try:
                 conn.execute(sql_insert)
