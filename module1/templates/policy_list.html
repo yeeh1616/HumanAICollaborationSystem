@@ -24,6 +24,7 @@
                         <th scope="col">Policy Id</th>
                         <th scope="col">Description</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                     </tr>
                 {% for policy in policy_list %}
                     <tr>
@@ -43,8 +44,8 @@
                 {% endfor %}
                 </tbody>
             </table>
-            {{ pagination.info }}
             {{ pagination.links }}
+            {{ pagination.info }}
         </div>
     </div>
 </body>

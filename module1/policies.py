@@ -8,52 +8,41 @@ per_page = 10
 
 @bp_policies.route("/policies/all", methods=['GET', 'POST'])
 @login_required
-def getAllPolicies(search=False):
+def getAllPolicies():
+    # search = bool(request.args.get('q'))
+    # search = request.form.get('q')
     page = request.args.get(get_page_parameter(), type=int, default=1)
     policies_count = CoronaNet.query.count()
 
-    # policy_list = CoronaNet.query.all()
     policy_list = CoronaNet.query.paginate(page=page, per_page=per_page).items
     pagination = Pagination(page=page,
                             total=policies_count,
-                            search=search,
+                            search=False,
                             record_name='policy_list',
                             css_framework='bootstrap3',
-                            per_page=per_page)
+                            per_page=per_page,
+                            show_single_page=True)
 
-    if search:
-        resp = make_response(render_template('policy_list.html',
-                               policy_list=policy_list,
-                               pagination=pagination,
-                               ))
-        resp.set_cookie('cb', '')
-        return resp
-    else:
-        username = request.cookies.get('cb')
-        return render_template('policy_list.html',
-                        policy_list=policy_list,
-                        pagination=pagination,
-                        )
+    return render_template('policy_list.html',
+                    policy_list=policy_list,
+                    pagination=pagination,
+                    )
 
 
 @bp_policies.route("/policies/<string:policy_id>/search", methods=['GET', 'POST'])
 @login_required
 def search(policy_id):
     policy_list = CoronaNet.query.filter_by(policy_id=policy_id)
-    policies_count = CoronaNet.query.count()
-    pagination = Pagination(page=1,
-                            total=policies_count,
-                            search=search,
-                            record_name='policy_list',
-                            css_framework='bootstrap3',
-                            per_page=per_page)
-    return render_template('policy_list.html', policy_list=policy_list, pagination=pagination)
+    return seachBase(policy_list)
 
 
 @bp_policies.route("/policies/searchAll", methods=['GET', 'POST'])
 @login_required
 def searchAll():
     policy_list = CoronaNet.query.paginate(page=1, per_page=per_page).items
+    return seachBase(policy_list)
+
+def seachBase(policy_list):
     policies_count = CoronaNet.query.count()
     pagination = Pagination(page=1,
                             total=policies_count,
