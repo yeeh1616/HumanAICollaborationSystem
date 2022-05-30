@@ -8,7 +8,7 @@ function save_summary(pid, f1) {
              var btn_save = document.getElementById("save_summary");
              var btn_next = document.getElementById("next");
              btn_save.disabled = true;
-             btn_next.disabled = f1;
+             btn_next.disabled = false;
         }
     };
     xhttp.open("POST", "/policies/save_summary");
@@ -20,7 +20,8 @@ function summary_change() {
     btn_save.disabled = false;
 }
 
-function reload_summary(pid, des) {
+function reload_summary(pid) {
+    var des = document.getElementById("divSummaryText").innerText;
     var btn = document.getElementById("btn_reload");
 
     if(btn.innerHTML=="Reload Summary"){
