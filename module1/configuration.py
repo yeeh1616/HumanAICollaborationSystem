@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required
 
 from module1.models import CoronaNet
@@ -42,7 +42,4 @@ def save():
 @bp_configuration.route('/configuration/done', methods=['GET', 'POST'])
 @login_required
 def done():
-    page = request.args.get('page', 1, type=int)
-    policy_list = CoronaNet.query.paginate(page=page, per_page=10)
-
-    return render_template('policy_list.html', policy_list=policy_list)
+    return redirect(url_for('policies.getAllPolicies'))
