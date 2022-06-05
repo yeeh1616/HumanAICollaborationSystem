@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/HumanAICollaborationSystem.iml" filepath="$PROJECT_DIR$/.idea/HumanAICollaborationSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/HumanAICollaborationSystemV1.iml" filepath="$PROJECT_DIR$/.idea/HumanAICollaborationSystemV1.iml" />
     </modules>
   </component>
 </project>
