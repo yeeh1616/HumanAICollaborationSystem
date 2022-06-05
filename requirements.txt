@@ -1,0 +1,14 @@
+pip~=22.1.2
+setuptools~=49.2.1
+
+Flask~=2.1.2
+Flask_SQLAlchemy~=2.5.1
+SQLAlchemy~=1.4.37
+WTForms~=3.0.1
+transformers~=4.19.2
+numpy~=1.22.4
+requests~=2.27.1
+nltk~=3.7
+torch~=1.11.0
+sklearn~=0.0
+scikit-learn~=1.1.1

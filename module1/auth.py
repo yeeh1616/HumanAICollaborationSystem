@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, url_for, redirect
+from flask import Blueprint, render_template, url_for, redirect
 from flask_login import login_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField

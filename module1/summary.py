@@ -17,6 +17,7 @@ model = AutoModelForQuestionAnswering.from_pretrained("deepset/bert-base-cased-s
 
 nltk.download('stopwords')
 
+
 @bp_summary.route("/policies/save_summary", methods=['POST'])
 @login_required
 def save_summary():
